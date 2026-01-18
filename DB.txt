@@ -1,0 +1,37 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS mfcc_system;
+USE mfcc_system;
+
+-- Create users table
+CREATE TABLE IF NOT EXISTS users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Create doctors table
+CREATE TABLE IF NOT EXISTS doctors (
+    doctor_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    specialty VARCHAR(100) NOT NULL
+);
+
+-- Create appointments table
+CREATE TABLE IF NOT EXISTS appointments (
+    appointment_id INT AUTO_INCREMENT PRIMARY KEY,
+    patient_name VARCHAR(100) NOT NULL,
+    appointment_date DATE NOT NULL,
+    appointment_time TIME NOT NULL,
+    doctor_id INT NOT NULL,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
+);
+
+-- Insert default admin user
+INSERT INTO users (username, password) VALUES ('admin', 'admin');
+
+-- Insert sample doctors
+INSERT INTO doctors (name, specialty) VALUES 
+('Dr. Ali', 'Cardiology'),
+('Dr. Marwa', 'Pediatrics'),
+('Dr. Mohammed', 'Orthopedics'),
+('Dr. khalid', 'Dermatology');
